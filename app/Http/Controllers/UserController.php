@@ -11,9 +11,6 @@ class UserController extends Controller
 {
     public function userProfile()   {
         $user = Auth::user();
-
-        // Alternatively, if you need the user's ID specifically
-        // $userId = Auth::id();
         
         // You can then return a view with the user data
         return view('users.profile.edit', ['user' => $user]);
@@ -40,10 +37,6 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
     
-        // Example: Update user role if provided (adjust this based on your actual logic)
-        // if ($request->role) {
-        //     $user->role = $request->role;
-        // }
     
         $user->save();
     

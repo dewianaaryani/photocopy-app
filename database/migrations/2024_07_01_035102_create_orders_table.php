@@ -18,12 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('total_price', 8, 2);
             //0 = pickup, 1 = delivery
-            $table->string('type_delivery')->default('pickup');
+            $table->string('type_delivery', 50)->default('pickup');
             $table->string('destination')->nullable();
             $table->integer('distance')->nullable();
             $table->tinyInteger('order_status')->default(0);
             $table->string('notes')->nullable();
-            $table->string('payment_prove')->nullable();
+            $table->string('payment_prove', 50)->nullable();
             $table->tinyInteger('payment_status')->default(0);
             $table->timestamps();
 
