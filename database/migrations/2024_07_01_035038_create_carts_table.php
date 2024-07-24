@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->string('file_pdf')->nullable();
+            $table->string('file_pdf', 100)->nullable();
             $table->integer('quantity');
             $table->integer('number_of_page')->nullable();
             $table->unsignedBigInteger('additional_id')->nullable();
