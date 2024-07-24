@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('distance')->nullable();
             $table->tinyInteger('order_status')->default(0);
             $table->string('notes')->nullable();
-            $table->string('payment_prove', 50)->nullable();
+            $table->string('payment_prove')->nullable();
             $table->tinyInteger('payment_status')->default(0);
             $table->timestamps();
 
