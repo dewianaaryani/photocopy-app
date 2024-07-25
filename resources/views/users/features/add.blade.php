@@ -52,11 +52,34 @@ if ($currentRoute == 'photocopy.add') {
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <div class="section-title">File Browser</div>
+                            <div class="section-title">File Browser *</div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="file_pdf" required>
+                                <input type="file" class="custom-file-input" id="customFile" name="file_pdf" required
+                                    @if($currentRoute == 'photocopy.add' || $currentRoute == 'printout.add')
+                                        accept=".pdf"
+                                    @elseif($currentRoute == 'cetakfoto.add')
+                                        accept="image/*"
+                                    @endif
+                                >
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
+            
+                            @php
+                                $fileTypeMessage = '';
+            
+                                if ($currentRoute == 'photocopy.add') {
+                                    $fileTypeMessage = 'File harus format pdf pada fotokopi.';
+                                } elseif ($currentRoute == 'printout.add') {
+                                    $fileTypeMessage = 'File harus format pdf pada print out.';
+                                } elseif ($currentRoute == 'cetakfoto.add') {
+                                    $fileTypeMessage = 'File harus format gambar(e.g., JPG, PNG) untuk Cetak Foto.';
+                                }
+                            @endphp
+            
+                            <!-- Display the file type requirement message -->
+                            <small class="form-text text-muted">
+                                {{ $fileTypeMessage }}
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -64,7 +87,7 @@ if ($currentRoute == 'photocopy.add') {
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Quantity</label>
+                            <label class="form-label">Quantity *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <button type="button" class="btn btn-primary" onclick="decrementQuantity()">-</button>
@@ -81,7 +104,7 @@ if ($currentRoute == 'photocopy.add') {
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Select Product Size</label>
+                            <label class="form-label">Select Product Size *</label>
                             <div class="selectgroup selectgroup-pills">
                                 @foreach($sizes as $size)
                                     <label class="selectgroup-item">
@@ -103,7 +126,7 @@ if ($currentRoute == 'photocopy.add') {
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Select Product Color</label>
+                            <label class="form-label">Select Product Color *</label>
                             <div class="selectgroup selectgroup-pills">
                                 @foreach($colors as $color)
                                     <label class="selectgroup-item">
@@ -231,4 +254,15 @@ if ($currentRoute == 'photocopy.add') {
         });
     </script>
     @endif
+    <script>
+        $(document).ready(function() {
+            $('#customFile').change(function(event) {
+                // Get the selected file name
+                var fileName = event.target.files[0].name;
+    
+                // Update the label text with the file name
+                $(this).next('.custom-file-label').text(fileName);
+            });
+        });
+    </script>
 @endsection

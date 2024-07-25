@@ -63,11 +63,11 @@ class ProductSeeder extends Seeder
 
             // Jilid
             ['name' => 'Biasa', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 5000],
-            ['name' => 'No4', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 6000],
-            ['name' => 'No5', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 7000],
-            ['name' => 'No6', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 8000],
-            ['name' => 'No7', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 9000],
-            ['name' => 'No8', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 10000],
+            ['name' => 'Spiral No4', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 6000],
+            ['name' => 'Spiral No5', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 7000],
+            ['name' => 'Spiral No6', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 8000],
+            ['name' => 'Spiral No7', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 9000],
+            ['name' => 'Spiral No8', 'category_id' => Category::where('name', 'jilid')->first()->id, 'price' => 10000],
 
             ['name' => 'Seragam SD', 'category_id' => Category::where('name', 'pakaian')->first()->id, 'price' => 40000],
             ['name' => 'Seragam SMP', 'category_id' => Category::where('name', 'pakaian')->first()->id, 'price' => 40000],
