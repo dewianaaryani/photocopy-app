@@ -58,7 +58,7 @@
                                         </div>
 
                                         <div id="pickup-message" class="alert alert-primary" style="display:none;">
-                                            Kamu harus mempick up di <a href="https://www.google.com/maps/search/?api=1&query=-6.6487692,106.8374509" target="_blank">lokasi ini</a>.
+                                            Kamu harus mempick up di <a href="https://www.google.com/maps/place/Bintang+and+family/@-6.1557882,106.9268417,17z/data=!3m1!4b1!4m6!3m5!1s0x2e698b00003a5d35:0x8bda2ea1bf7b6e04!8m2!3d-6.1557882!4d106.929422!16s%2Fg%2F11w207m2m7?entry=ttu" target="_blank">lokasi fotokopi</a>.
                                         </div>
 
                                         <div id="delivery-input" style="display:none;">

@@ -57,10 +57,10 @@ class OrderController extends Controller
             
         ];
         
-        $originAddress = 'Toko Dewiana, Bogor'; // Replace with your actual origin address
+        // Replace with your actual origin address
         $apiKey = env('GOOGLE_MAPS_API_KEY');
     
-        return view('users.features.cart.checkout', compact('origin', 'originAddress', 'apiKey', 'userCartItems'));
+        return view('users.features.cart.checkout', compact('origin', 'apiKey', 'userCartItems'));
         
     }
     // public function checkout(Request $request) {
@@ -116,7 +116,7 @@ class OrderController extends Controller
         $request->validate([
             'deliveryOption' => 'required|in:pickup,delivery',
             'destination' => 'required_if:deliveryOption,delivery',
-            'distance_input' => 'nullable|numeric|min:1',
+            'distance_input' => 'nullable|numeric|min:0.5',
             'notes' => 'nullable|string',
             'total_price' => 'required|string',
             'items' => 'required|array',
