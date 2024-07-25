@@ -52,9 +52,8 @@ class OrderController extends Controller
         //if the type order is 1(delivery)
         
         $origin = [
-            'lat' => -6.6487692,
-            'lng' => 106.8374509,
-            
+            'lat' => -6.1557882,
+            'lng' => 106.9268417,
             
         ];
         
