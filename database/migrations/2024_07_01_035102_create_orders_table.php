@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->decimal('total_price', 8, 2);
             //0 = pickup, 1 = delivery
             $table->string('type_delivery', 50)->default('pickup');
