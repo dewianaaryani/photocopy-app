@@ -7,7 +7,17 @@ Orders
 @section('content')
     <div class="container">
         <div class="card card-primary">
-            <div class="card-header"><h4>Your Orders</h4></div>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Your Orders</h4>
+                <!-- Breadcrumbs aligned to the very right -->
+                <nav aria-label="breadcrumb" class="md:ml-auto">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        
+                        <li class="breadcrumb-item active" aria-current="page">Order</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="card-body">
                 @if(session('status'))
                     <div class="col-12">         
