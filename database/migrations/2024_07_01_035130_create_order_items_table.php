@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('file_pdf', 100)->nullable();
             $table->integer('quantity');
             $table->integer('number_of_page')->nullable();
+            $table->integer('selected_number_of_page')->nullable();
             $table->unsignedInteger('additional_id')->nullable();
             $table->integer('price');
             $table->timestamps();

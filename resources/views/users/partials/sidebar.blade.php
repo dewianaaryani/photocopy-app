@@ -21,14 +21,14 @@
       <li class="dropdown">
         <a href="{{route('admin.orders.index')}}" class="nav-link"><i class="fas fa-list"></i><span>Orders</span></a>
       </li>
-      <li class="menu-header">Categories</li>
+      {{-- <li class="menu-header">Categories</li>
       <li class="dropdown">
         <a href="{{route('admin.categories.index')}}" class="nav-link"><i class="fas fa-th-list"></i><span>Categories</span></a>
       </li>
       <li class="menu-header">Products</li>
       <li class="dropdown">
         <a href="{{route('admin.products.index')}}" class="nav-link"><i class="fas fa-boxes"></i><span>Products</span></a>
-      </li>
+      </li> --}}
     @else
       <li class="menu-header">Dashboard</li>
       <li class="dropdown">
@@ -44,9 +44,9 @@
       <li class="dropdown">
         <a href="{{route('cetakfoto.add')}}" class="nav-link"><i class="fas fa-camera"></i><span>Cetak Foto</span></a>
       </li>
-      <li class="dropdown">
+      {{-- <li class="dropdown">
         <a href="{{route('products.index')}}" class="nav-link"><i class="fas fa-box-open"></i><span>Products</span></a>
-      </li>
+      </li> --}}
       <li class="menu-header">Orders</li>
       <li class="dropdown">
         <a href="{{route('cart.index')}}" class="nav-link"><i class="fas fa-shopping-cart"></i><span>My Carts</span></a>

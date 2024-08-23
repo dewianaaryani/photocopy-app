@@ -9,9 +9,25 @@ use App\Models\OrderItem;
 use App\Models\User;
 class OrderController extends Controller
 {
-    public function index(){
-        $orders = Order::latest()->get();
-   
+    public function index(Request $request)
+    {
+        // Get search query
+        $search = $request->input('search');
+
+        // Fetch orders with user relation, filtered if search is provided, and order by latest
+        $orders = Order::with('user') // Eager load the related User model
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('user', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%"); // Search based on user name
+                })
+                ->orWhere('order_status', 'like', "%{$search}%")
+                ->orWhere('payment_status', 'like', "%{$search}%")
+                ->orWhere('total_price', 'like', "%{$search}%")
+                ->orWhere('created_at', 'like', "%{$search}%");
+            })
+            ->latest() // Order by the latest (created_at)
+            ->get();
+
         return view('admin.features.order.index', compact('orders'));
     }
     public function view($id){
@@ -34,12 +50,20 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back()->with('status', 'payment accept successfully.');
     }
-    public function pesananJadi($id){
+    public function pesananJadi(Request $request, $id) {
         $order = Order::findOrFail($id);
         
+        // Validate the track link if needed
+        $request->validate([
+            'track_link' => 'required|url',
+        ]);
+    
+        // Save the track link if necessary
+        $order->track_link = $request->input('track_link');
         $order->order_status = 2;
         $order->save();
-        return redirect()->back()->with('status', 'orders create successfully, ready to pickup!');
+        
+        return redirect()->back()->with('status', 'Order updated successfully, ready to pickup!');
     }
     public function pesananSelesai($id){
         $order = Order::findOrFail($id);

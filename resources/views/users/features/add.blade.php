@@ -8,8 +8,6 @@ if ($currentRoute == 'photocopy.add') {
     $pageName = 'Photocopy';
 } elseif ($currentRoute == 'printout.add') {
     $pageName = 'Printout';
-} elseif ($currentRoute == 'cetakfoto.add') {
-    $pageName = 'Cetak Foto';
 }
 @endphp
 
@@ -19,10 +17,18 @@ if ($currentRoute == 'photocopy.add') {
 
 @section('content')
 <section class="section">
-    <div class="section-header">
-        <h1>{{$pageName}}</h1>
+    <div class="section-header d-flex justify-content-between align-items-center ">
+        <h1 class="mb-0">{{$pageName}}</h1>
+        <nav aria-label="breadcrumb" class="md:ml-auto">
+            <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    
+                    <li class="breadcrumb-item active" aria-current="page">{{$pageName}}</li>
+                </ol>
+            </nav>
     </div>
     <div class="card card-primary">
+        
         <div class="card-header"><h4>Create New Order for {{$pageName}}</h4></div>
         @if(session('status'))
             <div class="col-12">
@@ -41,11 +47,9 @@ if ($currentRoute == 'photocopy.add') {
         <div class="card-body">
             <form method="POST" action="
                 @if($currentRoute == 'photocopy.add')
-                    {{ route('photocopyAddToCart') }}
+                    {{ route('photocopyAddToSelected') }}
                 @elseif($currentRoute == 'printout.add')
-                    {{ route('printoutAddToCart') }}
-                @elseif($currentRoute == 'cetakfoto.add')
-                    {{ route('cetakfotoAddToCart') }}
+                    {{ route('printoutAddToSelected') }}
                 @endif
             " enctype="multipart/form-data">
                 @csrf
@@ -57,8 +61,6 @@ if ($currentRoute == 'photocopy.add') {
                                 <input type="file" class="custom-file-input" id="customFile" name="file_pdf" required
                                     @if($currentRoute == 'photocopy.add' || $currentRoute == 'printout.add')
                                         accept=".pdf"
-                                    @elseif($currentRoute == 'cetakfoto.add')
-                                        accept="image/*"
                                     @endif
                                 >
                                 <label class="custom-file-label" for="customFile">Choose file</label>
@@ -71,9 +73,7 @@ if ($currentRoute == 'photocopy.add') {
                                     $fileTypeMessage = 'File harus format pdf pada fotokopi.';
                                 } elseif ($currentRoute == 'printout.add') {
                                     $fileTypeMessage = 'File harus format pdf pada print out.';
-                                } elseif ($currentRoute == 'cetakfoto.add') {
-                                    $fileTypeMessage = 'File harus format gambar(e.g., JPG, PNG) untuk Cetak Foto.';
-                                }
+                                } 
                             @endphp
             
                             <!-- Display the file type requirement message -->
@@ -84,22 +84,7 @@ if ($currentRoute == 'photocopy.add') {
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="form-label">Quantity *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-primary" onclick="decrementQuantity()">-</button>
-                                </div>
-                                <input type="text" class="form-control text-center" id="quantity-input" name="quantity" value="1">
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary" onclick="incrementQuantity()">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-12">
@@ -122,7 +107,7 @@ if ($currentRoute == 'photocopy.add') {
                 <!-- Quantity Section -->
                 
 
-                @if($currentRoute != 'cetakfoto.add')
+                
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
@@ -194,7 +179,7 @@ if ($currentRoute == 'photocopy.add') {
                         </div>
                     </div>
                 </div>
-                @endif 
+                
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -223,7 +208,7 @@ if ($currentRoute == 'photocopy.add') {
             quantityInput.value = currentValue + 1;
         }
     </script>
-    @if($currentRoute != 'cetakfoto.add')
+   
     <script>
         var laminatingRadio = document.getElementById('laminating-radio');
         var emptyRadio = document.getElementById('empty-radio');
@@ -253,7 +238,7 @@ if ($currentRoute == 'photocopy.add') {
             }
         });
     </script>
-    @endif
+  
     <script>
         $(document).ready(function() {
             $('#customFile').change(function(event) {

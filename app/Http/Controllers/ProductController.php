@@ -43,7 +43,7 @@ class ProductController extends Controller
         $colors = $cetakfotoProducts->unique('color_type')->values();
         $additionalLaminating = $laminatings->unique('size')->values();
        
-        return view('users.features.add', compact('cetakfotoProducts', 'sizes', 'colors', 'additionalLaminating', 'jilids'));
+        return view('users.features.addPhoto', compact('cetakfotoProducts', 'sizes', 'colors', 'additionalLaminating', 'jilids'));
     }
     public function printoutAdd() {
         $printoutProducts = Product::whereHas('category', function ($query) {

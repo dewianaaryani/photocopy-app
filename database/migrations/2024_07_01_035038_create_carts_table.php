@@ -18,10 +18,11 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('product_id');
             $table->string('file_pdf', 100)->nullable();
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->integer('number_of_page')->nullable();
+            $table->string('selected_number_of_page', 100)->nullable();
             $table->unsignedInteger('additional_id')->nullable();
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

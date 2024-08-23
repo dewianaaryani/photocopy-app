@@ -7,7 +7,17 @@ Orders
 @section('content')
 <div class="container">
     <div class="card card-primary">
-        <div class="card-header"><h4>Order Details</h4></div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Order Details</h4>
+            <!-- Breadcrumbs aligned to the very right -->
+            <nav aria-label="breadcrumb" class="md:ml-auto">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('orders.index') }}">Orders</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                </ol>
+            </nav>
+        </div>
         <div class="card-body">
             <div class="row mb-4">
                 @if(session('status'))
@@ -47,6 +57,15 @@ Orders
                                     {!! nl2br(e($order->destination)) !!}
                                 </a><br>
                                 {{$order->notes}}
+                                <br>
+                                   <br> 
+                                    @if ($order->track_link)
+                                        <strong>Track your driver:</strong><br>
+                                       
+                                        <a href="{{$order->track_link}}" target="_blank">
+                                            {!! nl2br(e($order->track_link)) !!}
+                                        </a><br>
+                                    @endif
                             @else
                                 <strong>Pick Up By:</strong><br>
                                 {{$user->name}}<br>

@@ -195,7 +195,7 @@ class OrderController extends Controller
     public function uploadPaymentProof(Request $request, $id)
     {
         $request->validate([
-            'payment_prove' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'payment_prove' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
         ]);
 
         $order = Order::findOrFail($id);

@@ -7,7 +7,7 @@ Orders
 @section('content')
     <div class="container">
         <div class="card card-primary">
-            <div class="card-header"><h4>Your Orders</h4></div>
+            <div class="card-header"><h4> Orders</h4></div>
             <div class="card-body">
                 @if(session('status'))
                     <div class="col-12">         
@@ -29,7 +29,14 @@ Orders
                             <div class="card-header">
                                 <h4>Order Table</h4>
                                 <div class="card-header-form">
-                                    <!-- You can add search or filter form here if needed -->
+                                    <form method="GET" action="{{ route('admin.orders.index') }}">
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Search" value="{{ request('search') }}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -37,6 +44,7 @@ Orders
                                     <table class="table table-striped">
                                         <tr>
                                             <th>No</th>
+                                            <th>Name</th>
                                             <th>Created At</th>
                                             <th>Order Status</th>
                                             <th>Payment Status</th>
@@ -46,6 +54,7 @@ Orders
                                         @foreach($orders as $index => $order)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
+                                            <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->created_at }}</td>
                                             <td>
                                                 @if($order->order_status == 0)

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->tinyInteger('order_status')->default(0);
             $table->string('notes')->nullable();
             $table->string('payment_prove', 100)->nullable();
+            $table->string('track_link')->nullable();
             $table->tinyInteger('payment_status')->default(0);
             $table->timestamps();
 

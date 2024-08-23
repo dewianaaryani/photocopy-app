@@ -27,8 +27,12 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 // Route to handle registration form submission
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
+})->name('home');
+
+Route::get('/', function () {
+    return view('welcome');
 })->name('home');
 
 Auth::routes();
@@ -47,8 +51,15 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/printout', [ProductController::class, 'printoutAdd'])->name('printout.add');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('products/category/{category}', [ProductController::class, 'productsByCategory'])->name('products.by.category');
-    Route::post('/photocopyAddToCart', [CartController::class, 'photocopyAddToCart'])->name('photocopyAddToCart');
-    Route::post('/printoutAddToCart', [CartController::class, 'printoutAddToCart'])->name('printoutAddToCart');
+    Route::post('/photocopyAddToSelected', [CartController::class, 'photocopyAddToSelected'])->name('photocopyAddToSelected');
+    Route::post('/printoutAddToSelected', [CartController::class, 'printoutAddToSelected'])->name('printoutAddToSelected');
+    Route::get('/photocopyChoose/{id}', [CartController::class, 'photocopyChoose'])->name('photocopyChoose');
+    Route::get('/printoutChoose/{id}', [CartController::class, 'printoutChoose'])->name('printoutChoose');
+    Route::post('/photocopyChoosed/{id}', [CartController::class, 'photocopyChoosed'])->name('photocopyChoosed');
+    Route::post('/printoutChoosed/{id}', [CartController::class, 'printoutChoosed'])->name('printoutChoosed');
+    Route::post('/cart/{id}/photocopyCancel', [CartController::class, 'photocopyCancel'])->name('photocopyCancel');
+    Route::post('/cart/{id}/printoutCancel', [CartController::class, 'printoutCancel'])->name('printoutCancel');
+
     Route::post('/cetakfotoAddToCart', [CartController::class, 'cetakfotoAddToCart'])->name('cetakfotoAddToCart');
     Route::post('/product/{product}', [CartController::class, 'productAddToCart'])->name('productAddToCart');
 
@@ -66,7 +77,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     });
 });
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     
     Route::prefix('admin')->name('admin.')->group(function () {
 

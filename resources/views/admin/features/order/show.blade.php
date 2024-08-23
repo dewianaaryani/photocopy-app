@@ -7,7 +7,17 @@ Orders
 @section('content')
     <div class="container">
         <div class="card card-primary">
-            <div class="card-header"><h4>Order Details</h4></div>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Order Details</h4>
+                <!-- Breadcrumbs aligned to the very right -->
+                <nav aria-label="breadcrumb" class="md:ml-auto">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.orders.index') }}">Orders</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="card-body">
                 <div class="row mb-4">
                     @if(session('status'))
@@ -45,6 +55,16 @@ Orders
                                         {!! nl2br(e($order->destination)) !!}
                                     </a><br>
                                     {{$order->notes}}
+                                   <br>
+                                   <br> 
+                                    @if ($order->track_link)
+                                        <strong>Track your driver:</strong><br>
+                                       
+                                        <a href="{{$order->track_link}}" target="_blank">
+                                            {!! nl2br(e($order->track_link)) !!}
+                                        </a><br>
+                                    @endif
+
                                 @else
                                     <strong>Pick Up By:</strong><br>
                                     {{$user->name}}<br>
@@ -113,7 +133,7 @@ Orders
                                                 {{ $item->product->category->name }} {{ $item->product->name }}
                                             </div>
                                             <div class="text-muted small">
-                                                Rp. {{ number_format($item->product->price, 2) }}
+                                                Rp. {{ number_format($item->product->price, 2) }} / lembar
                                             </div>
                                         </td>
                                         <td>
@@ -134,6 +154,7 @@ Orders
                                                     <a href="{{ asset($item->file_pdf) }}" target="_blank">{{ basename($item->file_pdf) }}</a>
                                                 </div>
                                                 <div class="text-muted small">Page: {{ $item->number_of_page }}</div>
+                                                <div class="text-muted small">Halaman yang di {{$item->product->category->name}}: No {{ $item->number_of_page }}</div>
                                             @endif
                                         </td>
                                         <td class="text-center">{{ $item->quantity }}</td>
@@ -188,12 +209,12 @@ Orders
                         <div class="float-lg-left mb-lg-0 mb-3">
                             @if($order->payment_prove)
                                 
-                                    <a class="btn btn-primary btn-icon icon-left mb-3" href="{{ asset('storage/' . $order->payment_prove) }}" target="_blank"><i class="fas fa-credit-card"></i>View Bukti Bayar</a>
+                                    <a class="btn btn-primary btn-icon icon-left mb-6" href="{{ asset('storage/' . $order->payment_prove) }}" target="_blank"><i class="fas fa-credit-card"></i>View Bukti Bayar</a>
                                 
                             @endif
                           
                         </div>
-                      </div>
+                    </div>
                     </div>
                 </div>
                 <br>
@@ -213,7 +234,9 @@ Orders
                                 <form action="{{ route('admin.orders.pesanan-jadi', $order->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        <label for="name">Link Track</label>
+                                        <input type="text" name="track_link" class="form-control" required>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
                                             Pesanan Sudah Jadi dan Sedang Diantar
                                         </button>
                                     </div>

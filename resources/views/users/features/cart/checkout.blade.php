@@ -7,8 +7,16 @@
 @section('content')
 <div class="container">
     <div class="card card-primary">
-        <div class="card-header">
-            <h4>Checkout</h4>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Checkout</h4>
+            <!-- Breadcrumbs aligned to the very right -->
+            <nav aria-label="breadcrumb" class="md:ml-auto">
+            <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('cart.index') }}">Carts</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                </ol>
+            </nav>
         </div>
         <form action="{{ route('cart.checkout') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -58,7 +66,8 @@
                                         </div>
 
                                         <div id="pickup-message" class="alert alert-primary" style="display:none;">
-                                            Kamu harus mempick up di <a href="https://www.google.com/maps/place/Bintang+and+family/@-6.1557882,106.9268417,17z/data=!3m1!4b1!4m6!3m5!1s0x2e698b00003a5d35:0x8bda2ea1bf7b6e04!8m2!3d-6.1557882!4d106.929422!16s%2Fg%2F11w207m2m7?entry=ttu" target="_blank">lokasi fotokopi</a>.
+                                            <p>Kamu harus mempick up di Lokasi </p>
+                                            <p><a href="https://www.google.com/maps/place/Bintang+and+family/@-6.1557882,106.9268417,17z/data=!3m1!4b1!4m6!3m5!1s0x2e698b00003a5d35:0x8bda2ea1bf7b6e04!8m2!3d-6.1557882!4d106.929422!16s%2Fg%2F11w207m2m7?entry=ttu" target="_blank">Bintang and family<br>Jl. Salon No.52, RT.6/RW.3, Sukapura, Kec. Cilincing, Jkt Utara, Daerah Khusus Ibukota Jakarta 14140</a></p>
                                         </div>
 
                                         <div id="delivery-input" style="display:none;">
@@ -68,6 +77,7 @@
                                                 <label for="delivery-notes">Delivery Notes:</label>
                                                 <textarea id="delivery-notes" class="form-control" rows="3" placeholder="Enter delivery notes" name="notes"></textarea>
                                             </div>
+                                            <div class="alert alert-primary mt-2">Pesanan kamu akan diantar ke alamat tersebut menggunakan Go Send atau Grab Send</div>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +205,7 @@
 <script>
     let origin = { lat: {{ $origin['lat'] }}, lng: {{ $origin['lng'] }} };
     let distanceInKm = 0;
-    const ratePerKm = 7000; // Adjust the rate per kilometer as needed
+    const ratePerKm = 4000; // Adjust the rate per kilometer as needed
 
     function toggleOption() {
         const pickupMessage = document.getElementById('pickup-message');
