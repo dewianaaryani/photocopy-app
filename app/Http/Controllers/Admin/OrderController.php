@@ -50,19 +50,39 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back()->with('status', 'payment accept successfully.');
     }
+    // public function pesananJadi(Request $request, $id) {
+    //     $order = Order::findOrFail($id);
+        
+    //     // Validate the track link if needed
+    //     $request->validate([
+    //         'track_link' => 'required|url',
+    //     ]);
+    
+    //     // Save the track link if necessary
+    //     $order->track_link = $request->input('track_link');
+    //     $order->order_status = 2;
+    //     $order->save();
+        
+    //     return redirect()->back()->with('status', 'Order updated successfully, ready to pickup!');
+    // }
     public function pesananJadi(Request $request, $id) {
         $order = Order::findOrFail($id);
-        
-        // Validate the track link if needed
-        $request->validate([
-            'track_link' => 'required|url',
-        ]);
     
-        // Save the track link if necessary
-        $order->track_link = $request->input('track_link');
+        // Check if track_link input is present
+        if ($request->has('track_link')) {
+            // Validate the track link
+            $request->validate([
+                'track_link' => 'required|url',
+            ]);
+    
+            // Save the track link
+            $order->track_link = $request->input('track_link');
+        }
+    
+        // Update the order status
         $order->order_status = 2;
         $order->save();
-        
+    
         return redirect()->back()->with('status', 'Order updated successfully, ready to pickup!');
     }
     public function pesananSelesai($id){
